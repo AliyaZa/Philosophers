@@ -6,16 +6,44 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/06/29 19:51:24 by nhill            ###   ########.fr       */
+/*   Updated: 2021/06/29 20:08:36 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int		check_word(char *word)
+{
+	int	i;
+
+	i = 0;
+	while (word[i])
+	{
+		if (!ft_isdigit(word[i]))
+			return (fn_error("not a valid argument"));
+	}
+	return (0);
+}
+
+int		check_args(char **argv)
+{
+	int	i;
+
+	i = 1;
+	while(argv[i++])
+	{
+		if (check_word(argv[i]))
+			return (1);
+	}
+	return(0);
+}
 
 int		main(int argc, char **argv)
 {
 	t_main_task	main_task;
 	if (argc < 5 || argc > 6)
 		return (fn_error("Wrong number of arguments"));
+	if (check_args(argv))
+		return (1);
 	return (0);
 }
