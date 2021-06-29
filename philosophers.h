@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:05:22 by nhill             #+#    #+#             */
-/*   Updated: 2021/06/29 19:30:57 by nhill            ###   ########.fr       */
+/*   Updated: 2021/06/29 19:38:01 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct		s_arg
 	int		died;
 }					t_arg;
 
-typedef struct		s_philosophers
+typedef struct		s_philosopher
 {
 	int				id;
 	long			start_time;
@@ -44,10 +44,15 @@ typedef struct		s_philosophers
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	right_fork;
 	pthread_t		philosopher;
-}					t_philosophers;
+}					t_philosopher;
 
-
-
+typedef struct		s_main_task
+{
+	long			time;
+	t_arg			*args;
+	t_mutex			*mutexes;
+	t_philosopher	*philosophers;
+}					t_main_task;
 
 
 #endif
