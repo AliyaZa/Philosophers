@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:05:22 by nhill             #+#    #+#             */
-/*   Updated: 2021/06/29 19:38:01 by nhill            ###   ########.fr       */
+/*   Updated: 2021/06/29 19:52:07 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct		s_main_task
 	t_mutex			*mutexes;
 	t_philosopher	*philosophers;
 }					t_main_task;
+
+int		fn_error(char *str);
 
 
 #endif

@@ -6,7 +6,7 @@
 #    By: nhill <nhill@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/16 19:49:45 by nhill             #+#    #+#              #
-#    Updated: 2021/06/16 20:02:51 by nhill            ###   ########.fr        #
+#    Updated: 2021/06/29 19:50:53 by nhill            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-SRCS = main.c
+SRCS = main.c philo_utils.c
 
 HDR = ./
 
