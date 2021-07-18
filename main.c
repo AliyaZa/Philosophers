@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 17:42:44 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/18 18:05:39 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int		main(int argc, char **argv)
 	if (check_args(argv))
 		return (1);
 	if (init(argc, argv, &main_task))
+		return (1);
+	if (init_mutex(&main_task))
 		return (1);
 	return (0);
 }
