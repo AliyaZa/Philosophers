@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:05:22 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 17:42:46 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/18 17:56:16 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ typedef struct		s_main_task
 int		fn_error(char *str);
 int		fn_isdigit(int ch);
 int		init(int argc, char **argv, t_main_task *main_task);
+int		fn_atoi(const char *str);
 
 #endif
