@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 18:05:39 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/18 18:36:32 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int		main(int argc, char **argv)
 		return (1);
 	if (init_mutex(&main_task))
 		return (1);
+	if (init_philosophers(&main_task))
 	return (0);
 }

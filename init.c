@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 17:35:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 18:17:43 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/18 18:58:08 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,36 @@ int		init_mutex(t_main_task *main_task)
 	if (pthread_mutex_init(&main_task->mutexes->written, NULL))
 		return (fn_error("can not init mutex"));
 	return (0);
+}
+
+static long	get_time(void)
+{
+	struct timeval	time;
+	long			time_value;
+
+	gettimeofday(&time, NULL);
+	time_value = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (time_value);
+}
+
+int		init_philosophers(t_main_task *main_task)
+{
+	long	start;
+	int		i;
+
+	main_task->philosophers = (t_philosopher *)malloc(sizeof(t_philosopher) * main_task->args->number_of_philosophers);
+	if (!main_task->philosophers)
+		return (fn_error("can not allocate memory for philosophers"));
+	start = get_time();
+	i = 0;
+	while (i++ < main_task->args->number_of_philosophers)
+	{
+		main_task->philosophers[i].id = i + 1;
+		main_task->philosophers[i].left_fork = &main_task->mutexes->forks[i];
+		main_task->philosophers[i].right_fork = &main_task->mutexes->forks[(i + 1) % main_task->args->number_of_philosophers];
+		main_task->philosophers[i].start_time = start;
+		main_task->philosophers[i].last_time = 0;
+		main_task->philosophers[i].args = main_task->args;
+		main_task->philosophers[i].mutex = main_task->mutexes;
+	}
 }
