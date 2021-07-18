@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 18:36:32 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/18 19:42:35 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,31 @@ int		check_args(char **argv)
 	return(0);
 }
 
+static void	*threads(void *philosopher)
+{
+	int				i;
+	t_philosopher	*phil;
+	pthread_t		death;
 
+	phil = (t_philosopher *)philosopher;
+	pthread_create(&death, NULL, check_death, (void *)phil);
+	pthread_detach(death);
+	while (phil->args->died == 0)
+	{
+		phil_eat(phil);
+	}
+}
+
+static int start_phil(t_main_task *main_task)
+{
+	int i;
+
+	i = 0;
+	while (i++ < main_task->args->number_of_philosophers)
+	{
+		if (pthread_create(&main_task->philosophers[i].philosopher, NULL, threads))
+	}
+}
 
 int		main(int argc, char **argv)
 {
@@ -52,5 +76,8 @@ int		main(int argc, char **argv)
 	if (init_mutex(&main_task))
 		return (1);
 	if (init_philosophers(&main_task))
+		return(1);
+	if (start_phil(&main_task))
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:05:22 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 18:58:05 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/18 19:28:02 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ int		fn_atoi(const char *str);
 int		init_mutex(t_main_task *main_task);
 int		init(int argc, char **argv, t_main_task *main_task);
 int		init_philosophers(t_main_task *main_task);
+long	get_time(void);
+void	*check_death(void *philosopher);
+void	phil_eat(t_philosopher *phil);
 
 #endif

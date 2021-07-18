@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 17:35:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 18:58:08 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/18 19:14:36 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		init_mutex(t_main_task *main_task)
 	return (0);
 }
 
-static long	get_time(void)
+long	get_time(void)
 {
 	struct timeval	time;
 	long			time_value;
