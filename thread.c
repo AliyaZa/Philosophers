@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 19:24:31 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 16:32:16 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 16:33:40 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	phil_sleep(long time_await)
+static void	sleep(long time_await)
 {
 	long	current_time;
 	long	period;
@@ -37,7 +37,7 @@ void	phil_eat(t_philosopher *phil)
 	if (phil->args->died == 0)
 		printf("%ld ms %d is eating", get_time() - phil->start_time, phil->id);
 	pthread_mutex_unlock(&phil->mutex->written);
-	phil_sleep(phil->args->time_to_eat);
+	sleep(phil->args->time_to_eat);
 	pthread_mutex_unlock(phil->left_fork);
 	pthread_mutex_unlock(phil->right_fork);
 }
