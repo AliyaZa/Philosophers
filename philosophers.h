@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:05:22 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 19:28:02 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:03:10 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct		s_mutex
 {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	written;
-	//pthread_mutex_t	*forks;
 }					t_mutex;
 
 typedef struct		s_arg
