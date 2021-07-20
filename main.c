@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 16:55:23 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:02:33 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,23 @@ static int start_phil(t_main_task *main_task)
 	{
 		if (pthread_create(&main_task->philosophers[i].philosopher, NULL, threads, &main_task->philosophers[i]))
 			return (fn_error("can not create philosopher"));
-		m_sleep(1);
+		fn_sleep(1);
 	}
+	i = 0;
+	while (i++ < main_task->args->number_of_philosophers)
+	{
+		if (pthread_join(main_task->philosophers[i].philosopher, NULL))
+			return (fn_error("can not join a thread"));
+	}
+	return (0);
+}
+
+static void	fn_free(t_main_task *main_task)
+{
+	free(main_task->args);
+	free(main_task->philosophers);
+	free(main_task->mutexes->forks);
+	free(main_task->mutexes);
 }
 
 int		main(int argc, char **argv)
@@ -86,5 +101,7 @@ int		main(int argc, char **argv)
 		return(1);
 	if (start_phil(&main_task))
 		return (1);
+	main_task.args->died = 1;
+	fn_free(&main_task);
 	return (0);
 }
