@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:06:23 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:40:49 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static int	check_args(char **argv)
 	int	i;
 
 	i = 1;
-	while(argv[i++])
+	while (argv[i++])
 	{
 		if (check_word(argv[i]))
 			return (1);
 	}
-	return(0);
+	return (0);
 }
 
 static void	*threads(void *philosopher)
@@ -51,21 +51,22 @@ static void	*threads(void *philosopher)
 	{
 		phil_eat(phil);
 		if (phil_full(phil, &i))
-			break;
+			break ;
 		phil_sleep(phil);
 		phil_think(phil);
 	}
 	return (NULL);
 }
 
-static int start_phil(t_main_task *main_task)
+static int	start_phil(t_main_task *main_task)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i++ < main_task->args->number_of_philosophers)
 	{
-		if (pthread_create(&main_task->philosophers[i].philosopher, NULL, threads, &main_task->philosophers[i]))
+		if (pthread_create(&main_task->philosophers[i].philosopher,
+				NULL, threads, &main_task->philosophers[i]))
 			return (fn_error("can not create philosopher"));
 		fn_sleep(1);
 	}
@@ -78,17 +79,10 @@ static int start_phil(t_main_task *main_task)
 	return (0);
 }
 
-static void	fn_free(t_main_task *main_task)
-{
-	free(main_task->args);
-	free(main_task->philosophers);
-	free(main_task->mutexes->forks);
-	free(main_task->mutexes);
-}
-
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_main_task	main_task;
+
 	if (argc < 5 || argc > 6)
 		return (fn_error("Wrong number of arguments"));
 	if (check_args(argv))
@@ -98,7 +92,7 @@ int		main(int argc, char **argv)
 	if (init_mutex(&main_task))
 		return (1);
 	if (init_philosophers(&main_task))
-		return(1);
+		return (1);
 	if (start_phil(&main_task))
 		return (1);
 	main_task.args->died = 1;

@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:51:05 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:18:22 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:51:48 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	fn_isspace(int c)
 	return (0);
 }
 
-int			fn_atoi(const char *str)
+int	fn_atoi(const char *str)
 {
 	unsigned int	ch;
 	unsigned int	l_ch;
@@ -31,18 +31,18 @@ int			fn_atoi(const char *str)
 	zn = 1;
 	while (str[i] && (fn_isspace(str[i])))
 		i++;
-	if ((str[i] == '+') || (str[i] == '-'))
-	{
-		if (str[i] == '-')
-			zn = -zn;
-		i++;
-	}
+	proverka(str, &i, &zn);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		l_ch = ch;
 		ch = ch * 10 + (unsigned int)(str[i++] - '0');
 		if (l_ch > ch)
-			return (zn > 0 ? -1 : 0);
+		{
+			if (zn > 0)
+				return (-1);
+			else
+				return (0);
+		}
 	}
 	return (ch * zn);
 }
@@ -57,7 +57,7 @@ static int	fn_strlen(const char *s)
 	return (i);
 }
 
-int		fn_isdigit(int ch)
+int	fn_isdigit(int ch)
 {
 	if (ch >= '0' && ch <= '9')
 		return (1);
@@ -65,7 +65,7 @@ int		fn_isdigit(int ch)
 		return (0);
 }
 
-int		fn_error(char *str)
+int	fn_error(char *str)
 {
 	write(2, "Error: ", 7);
 	write(2, str, fn_strlen(str));
