@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 19:42:35 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 16:34:55 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,12 @@ static void	*threads(void *philosopher)
 	while (phil->args->died == 0)
 	{
 		phil_eat(phil);
+		if (phil_full(phil, &i))
+			break;
+		phil_sleep(phil);
+		phil_think(phil);
 	}
+	return (NULL);
 }
 
 static int start_phil(t_main_task *main_task)
