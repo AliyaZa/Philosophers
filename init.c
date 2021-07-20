@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 17:35:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 19:14:36 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:21:50 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ int		init_philosophers(t_main_task *main_task)
 		main_task->philosophers[i].args = main_task->args;
 		main_task->philosophers[i].mutex = main_task->mutexes;
 	}
+	return (0);
 }
