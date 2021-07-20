@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:51:05 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 17:55:37 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:18:22 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			fn_atoi(const char *str)
 	ch = 0;
 	i = 0;
 	zn = 1;
-	while (str[i] && (ft_isspace(str[i])))
+	while (str[i] && (fn_isspace(str[i])))
 		i++;
 	if ((str[i] == '+') || (str[i] == '-'))
 	{

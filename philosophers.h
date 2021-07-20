@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:05:22 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:03:10 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:13:27 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,13 @@ int		fn_isdigit(int ch);
 int		init(int argc, char **argv, t_main_task *main_task);
 int		fn_atoi(const char *str);
 int		init_mutex(t_main_task *main_task);
-int		init(int argc, char **argv, t_main_task *main_task);
 int		init_philosophers(t_main_task *main_task);
 long	get_time(void);
 void	*check_death(void *philosopher);
+int		phil_full(t_philosopher *phil, int *i);
 void	phil_eat(t_philosopher *phil);
+void	fn_sleep(long time_await);
+void	phil_sleep(t_philosopher *phil);
+void	phil_think(t_philosopher *phil);
 
 #endif

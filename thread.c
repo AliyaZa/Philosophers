@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 19:24:31 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:00:04 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:13:28 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	fn_sleep(long time_await)
+void	fn_sleep(long time_await)
 {
 	long	current_time;
 	long	period;

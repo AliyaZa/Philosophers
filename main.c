@@ -6,13 +6,13 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:02:33 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:06:23 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int		check_word(char *word)
+static int	check_word(char *word)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int		check_word(char *word)
 	return (0);
 }
 
-int		check_args(char **argv)
+static int	check_args(char **argv)
 {
 	int	i;
 
