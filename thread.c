@@ -6,16 +6,24 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 19:24:31 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/18 19:42:14 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 16:23:29 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	sleep(long time_await)
+static void	phil_sleep(long time_await)
 {
 	long	current_time;
 	long	period;
+
+	current_time = get_time();
+	period = current_time + time_await;
+	while (period > current_time)
+	{
+		usleep(1);
+		current_time = get_time();
+	}
 }
 
 void	phil_eat(t_philosopher *phil)
@@ -27,10 +35,11 @@ void	phil_eat(t_philosopher *phil)
 		printf("%ld ms %d has taken a forks\n", get_time() - phil->start_time, phil->id);
 	phil->last_time = get_time() - phil->start_time;
 	if (phil->args->died == 0)
-		printf("%ld ms %d is eating", get_time() - phil->start_time, phil->id;
+		printf("%ld ms %d is eating", get_time() - phil->start_time, phil->id);
 	pthread_mutex_unlock(&phil->mutex->written);
-
-
+	phil_sleep(phil->args->time_to_eat);
+	pthread_mutex_unlock(phil->left_fork);
+	pthread_mutex_unlock(phil->right_fork);
 }
 
 void	*check_death(void *philosopher)
