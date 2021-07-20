@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 16:34:55 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 16:55:23 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ static int start_phil(t_main_task *main_task)
 	i = 0;
 	while (i++ < main_task->args->number_of_philosophers)
 	{
-		if (pthread_create(&main_task->philosophers[i].philosopher, NULL, threads))
+		if (pthread_create(&main_task->philosophers[i].philosopher, NULL, threads, &main_task->philosophers[i]))
+			return (fn_error("can not create philosopher"));
+		m_sleep(1);
 	}
 }
 
