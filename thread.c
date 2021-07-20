@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 19:24:31 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:13:28 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 17:26:22 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	phil_full(t_philosopher *phil, int *i)
 			}
 		}
 	}
+	return (0);
 }
 
 void	phil_sleep(t_philosopher *phil)
@@ -84,7 +85,8 @@ void	phil_sleep(t_philosopher *phil)
 	pthread_mutex_lock(&phil->mutex->written);
 	if (phil->args->died == 0)
 		printf("%ld ms %d is sleeping", get_time() - phil->start_time, phil->id);
-	pthread_mutex_unlock(&phil->args->time_to_sleep);
+	pthread_mutex_unlock(&phil->mutex->written);
+	fn_sleep(&phil->args->time_to_sleep);
 }
 
 void	phil_think(t_philosopher *phil)
