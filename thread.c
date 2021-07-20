@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 19:24:31 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 16:23:29 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/20 16:32:16 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,22 @@ void	*check_death(void *philosopher)
 		}
 	}
 	return (NULL);
+}
+
+int	phil_full(t_philosopher *phil, int *i)
+{
+	if (phil->args->number_of_times_each_philosopher_must_eat > 0)
+	{
+		(*i)++;
+		if (*i == phil->args->number_of_times_each_philosopher_must_eat)
+		{
+			if (phil->args->died == 0)
+			{
+				pthread_mutex_lock(&phil->mutex->written);
+				printf("%ld ms %d is full\n", get_time() - phil->start_time, phil->id);
+				pthread_mutex_unlock(&phil->mutex->written);
+				return (1);
+			}
+		}
+	}
 }
