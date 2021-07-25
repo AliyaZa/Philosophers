@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/25 19:15:46 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/25 19:59:04 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,26 @@ static int	start_phil(t_main_task *main_task)
 				NULL, threads, &main_task->philosophers[i]))
 			return (fn_error("can not create philosopher"));
 		fn_sleep(1);
+	}
+	if (main_task->args->number_of_philosophers == 1)
+	{
+		t_philosopher	phil;
+
+	phil = main_task->philosophers[0];
+	while (!phil.args->died)
+	{
+		if ((get_time() - phil.start_time - phil.last_time)
+			> phil.args->time_to_die)
+		{
+			pthread_mutex_lock(&phil.mutex->written);
+			if (phil.args->died == 0)
+				printf("%ld ms %d died\n", get_time()
+					- phil.start_time, phil.id);
+			phil.args->died = 1;
+			pthread_mutex_unlock(&phil.mutex->written);
+		}
+	}
+	return (0);
 	}
 	i = -1;
 	while (++i < main_task->args->number_of_philosophers)
