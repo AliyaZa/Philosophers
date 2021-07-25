@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 19:24:31 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:57:42 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/25 18:47:51 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	phil_eat(t_philosopher *phil)
 			get_time() - phil->start_time, phil->id);
 	phil->last_time = get_time() - phil->start_time;
 	if (phil->args->died == 0)
-		printf("%ld ms %d is eating", get_time() - phil->start_time, phil->id);
+		printf("%ld ms %d is eating\n", get_time() - phil->start_time, phil->id);
 	pthread_mutex_unlock(&phil->mutex->written);
 	fn_sleep(phil->args->time_to_eat);
 	pthread_mutex_unlock(phil->left_fork);
@@ -74,7 +74,7 @@ void	phil_sleep(t_philosopher *phil)
 {
 	pthread_mutex_lock(&phil->mutex->written);
 	if (phil->args->died == 0)
-		printf("%ld ms %d is sleeping", get_time()
+		printf("%ld ms %d is sleeping\n", get_time()
 			- phil->start_time, phil->id);
 	pthread_mutex_unlock(&phil->mutex->written);
 	fn_sleep(phil->args->time_to_sleep);

@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/25 18:35:40 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/25 18:46:08 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ static int	check_word(char *word)
 {
 	int	i;
 
-	i = 0;
-	while (word[i++])
+	i = -1;
+	while (word[++i])
 	{
 		if (!fn_isdigit(word[i]))
+		{
 			return (fn_error("not a valid argument"));
+		}
 	}
 	return (0);
 }
@@ -29,8 +31,8 @@ static int	check_args(char **argv)
 {
 	int	i;
 
-	i = 1;
-	while (argv[i++])
+	i = 0;
+	while (argv[++i])
 	{
 		if (check_word(argv[i]))
 			return (1);
@@ -87,10 +89,8 @@ int	main(int argc, char **argv)
 		return (fn_error("wrong number of arguments"));
 	if (check_args(argv))
 		return (1);
-		return (0);
 	if (init(argc, argv, &main_task))
 		return (1);
-	return (0);
 	if (init_mutex(&main_task))
 		return (1);
 	if (init_philosophers(&main_task))
