@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 17:35:20 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:39:37 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/25 19:10:16 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init(int argc, char **argv, t_main_task *main_task)
 		return (fn_error("can not allocate memory for args"));
 	main_task->args->died = 0;
 	main_task->args->number_of_philosophers = fn_atoi(argv[1]);
-	if (main_task->args->number_of_philosophers < 2
+	if (main_task->args->number_of_philosophers < 1
 		|| main_task->args->number_of_philosophers > 200)
 		return (fn_error("incorrect number of philosophers"));
 	main_task->args->time_to_die = fn_atoi(argv[2]);
@@ -52,9 +52,9 @@ int	init_mutex(t_main_task *main_task)
 		(sizeof(pthread_mutex_t) * main_task->args->number_of_philosophers);
 	if (!main_task->mutexes->forks)
 		return (fn_error("can not allocate memory for forks"));
-	i = 0;
-	while (i++ < main_task->args->number_of_philosophers)
-		if (pthread_mutex_init(&main_task->mutexes->written, NULL))
+	i = -1;
+	while (++i < main_task->args->number_of_philosophers)
+		if (pthread_mutex_init(&main_task->mutexes->forks[i], NULL))
 			return (fn_error("can not init mutex for forks"));
 	if (pthread_mutex_init(&main_task->mutexes->written, NULL))
 		return (fn_error("can not init mutex"));
@@ -81,8 +81,8 @@ int	init_philosophers(t_main_task *main_task)
 	if (!main_task->philosophers)
 		return (fn_error("can not allocate memory for philosophers"));
 	start = get_time();
-	i = 0;
-	while (i++ < main_task->args->number_of_philosophers)
+	i = -1;
+	while (++i < main_task->args->number_of_philosophers)
 	{
 		main_task->philosophers[i].id = i + 1;
 		main_task->philosophers[i].left_fork = &main_task->mutexes->forks[i];

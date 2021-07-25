@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:41:38 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/25 18:46:08 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/25 19:15:46 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static int	check_word(char *word)
 	while (word[++i])
 	{
 		if (!fn_isdigit(word[i]))
-		{
 			return (fn_error("not a valid argument"));
-		}
 	}
 	return (0);
 }
@@ -49,6 +47,7 @@ static void	*threads(void *philosopher)
 	phil = (t_philosopher *)philosopher;
 	pthread_create(&death, NULL, check_death, (void *)phil);
 	pthread_detach(death);
+	i = 0;
 	while (phil->args->died == 0)
 	{
 		phil_eat(phil);
@@ -64,16 +63,16 @@ static int	start_phil(t_main_task *main_task)
 {
 	int	i;
 
-	i = 0;
-	while (i++ < main_task->args->number_of_philosophers)
+	i = -1;
+	while (++i < main_task->args->number_of_philosophers)
 	{
 		if (pthread_create(&main_task->philosophers[i].philosopher,
 				NULL, threads, &main_task->philosophers[i]))
 			return (fn_error("can not create philosopher"));
 		fn_sleep(1);
 	}
-	i = 0;
-	while (i++ < main_task->args->number_of_philosophers)
+	i = -1;
+	while (++i < main_task->args->number_of_philosophers)
 	{
 		if (pthread_join(main_task->philosophers[i].philosopher, NULL))
 			return (fn_error("can not join a thread"));
