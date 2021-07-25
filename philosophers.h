@@ -6,7 +6,7 @@
 /*   By: nhill <nhill@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:05:22 by nhill             #+#    #+#             */
-/*   Updated: 2021/07/20 17:55:16 by nhill            ###   ########.fr       */
+/*   Updated: 2021/07/25 20:08:38 by nhill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void	phil_sleep(t_philosopher *phil);
 void	phil_think(t_philosopher *phil);
 void	fn_free(t_main_task *main_task);
 void	proverka(const char *str, int *i, int *zn);
+void	fn_death(t_main_task *main_task);
 
 #endif
